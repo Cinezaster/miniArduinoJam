@@ -1,3 +1,4 @@
+#include "intro.h"
 #include "stage.h"
 
 #define GAME_STATE_INIT      0
@@ -16,6 +17,8 @@
 
 unsigned int game_state = GAME_STATE_INIT;
 byte intro_sequence;
+byte SimonSays[16];
+byte level;
 
 void setup() {
   // put your setup code here, to run once:
@@ -26,6 +29,7 @@ void setup() {
   for (int i = 9; i < 13; i++) {
     pinMode(i, OUTPUT);
   }
+  randomSeed(analogRead(0));
 }
 
 void loop() {
@@ -34,10 +38,18 @@ void loop() {
    case GAME_STATE_INIT:
    {
      intro();
-     
      if (intro_sequence > 11) {
+       for (byte i = 0; i < 16; i++){
+         SimonSays[i] = random(0,4);
+       }
+       level = 3;
        game_state = GAME_STATE_PLAYING;
      }
+     break;
+   }
+   case GAME_STATE_PLAYING:
+   {
+     stageUpdate();
      break;
    }
  } 
