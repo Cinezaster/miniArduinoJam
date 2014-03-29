@@ -1,6 +1,7 @@
 #include <avr/pgmspace.h>
 #include <arduino.h>
 
+extern byte intro_sequence;
 // Variables will change:
 int ledState = LOW;             // ledState used to set the LED
 long previousMillis = 0;        // will store last time LED was updated
@@ -28,6 +29,9 @@ void intro() {
     for (int i = 9; i < 13; i++) {
       digitalWrite(i, ledState);
     }
-    
+    intro_sequence++;
+    if  (intro_sequence == 5) {
+      interval = 100;
+    }
   }
 }

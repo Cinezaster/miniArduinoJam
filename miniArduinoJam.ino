@@ -15,6 +15,7 @@
 #define button_white_pin = 5;
 
 unsigned int game_state = GAME_STATE_INIT;
+byte intro_sequence;
 
 void setup() {
   // put your setup code here, to run once:
@@ -34,6 +35,9 @@ void loop() {
    {
      intro();
      
+     if (intro_sequence > 11) {
+       game_state = GAME_STATE_PLAYING;
+     }
      break;
    }
  } 
